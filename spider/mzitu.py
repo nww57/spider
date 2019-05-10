@@ -6,10 +6,12 @@ class Mzitu():
     def __init__(self):
         self.headers = {
             'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"}
+        self.all_url = "http://www.mzitu.com/all"
 
-    def all_url(self, url):
-        html = self.request(url)  ##调用request函数把套图地址传进去会返回给我们一个response
-        all_a = BeautifulSoup(html.text, 'lxml').find('div', class_='all').find_all('a')
+    def dowload(self):
+        html = self.request(self.all_url)  ##调用request函数把套图地址传进去会返回给我们一个response
+        # all_a = BeautifulSoup(html.text, 'lxml').find('div', class_='all').find_all('a')
+        all_a = BeautifulSoup(html.text, 'lxml').find('div', class_='all').find_all('li')[0].find_all('a')
         # 页面更改 多了一个早期图片 需要删掉（小伙伴们 可以自己尝试处理一下这个页面）
         all_a.pop(0)
         # 上面是删掉列表的第一个元素
@@ -45,14 +47,16 @@ class Mzitu():
         path = path.strip()
         isExists = os.path.exists(os.path.join("D:\mzitu", path))
         if not isExists:
-            print('建了一个名字叫做', path, '的文件夹！')
             os.makedirs(os.path.join("D:\mzitu", path))
             os.chdir(os.path.join("D:\mzitu", path))  ##切换到目录
             return True
         else:
-            print(u'名字叫做', path, u'的文件夹已经存在了！')
             return False
 
     def request(self, url):  ##这个函数获取网页的response 然后返回
         content = requests.get(url, headers=self.headers)
         return content
+
+if __name__ == '__main__':
+    Mzitu = Mzitu()
+    Mzitu.dowload()
