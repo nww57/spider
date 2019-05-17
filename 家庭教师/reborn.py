@@ -3,11 +3,7 @@ import os
 from bs4 import BeautifulSoup
 
 
-class Migudm():
-    '''
-    咪咕动漫爬取 1-399话
-    '''
-
+class Reborn():
     def __init__(self):
         self.api_url = 'http://www.migudm.cn/opus/webQueryWatchOpusInfo.html'
         self.headers = {
@@ -28,6 +24,9 @@ class Migudm():
         else:
             return False
 
+    '''
+    咪咕动漫爬取 1-399话
+    '''
     def download399(self):
         index = 1
         while (index < 400):
