@@ -2,7 +2,8 @@ import requests
 import os
 import re
 from bs4 import BeautifulSoup
-
+import base64
+import json
 
 class Fox():
 
@@ -18,10 +19,10 @@ class Fox():
 
     def mkdir(self, path):  ##这个函数创建文件夹
         path = path.strip()
-        isExists = os.path.exists(os.path.join("D:\\狐妖小红娘", path))
+        isExists = os.path.exists(os.path.join("D:\\comic\\狐妖小红娘", path))
         if not isExists:
-            os.makedirs(os.path.join("D:\\狐妖小红娘", path))
-            os.chdir(os.path.join("D:\\狐妖小红娘", path))  ##切换到目录
+            os.makedirs(os.path.join("D:\\comic\\狐妖小红娘", path))
+            os.chdir(os.path.join("D:\\comic\\狐妖小红娘", path))  ##切换到目录
             return True
         else:
             return False
@@ -69,7 +70,7 @@ class Fox():
                 data = response.json()
                 img_url = data['Code']
                 img = self.request(img_url)
-                file_name = img_url[-8:]
+                file_name = img_url.spilit("")[-1]
                 f = open(file_name, 'ab')
                 f.write(img.content)
                 f.close()
@@ -79,4 +80,7 @@ class Fox():
 
 if __name__ == '__main__':
    fox = Fox()
-   fox.download()
+   html = fox.request("https://ac.qq.com/ComicView/index/id/518333/cid/2")
+   print(html.text)
+   b64_data = html.text.find("var DATA        = '{}'")
+   print(b64_data)
