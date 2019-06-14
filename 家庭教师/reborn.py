@@ -36,7 +36,7 @@ class Reborn():
                 'index': index,
                 'opusType': '2'
             }
-            file_path = "第" + str(index) + "话"
+            file_path =   str(index) + "话"
             print("开始下载" + file_path)
             self.mkdir(file_path)
             response = requests.post(self.api_url, data)
@@ -76,7 +76,7 @@ class Reborn():
     def downlodiid(self,catalog,sid,iid):
         api_url = "https://www.tohomh123.com/action/play/read"
         id = 1
-        file_path = "第" + catalog + "话"
+        file_path =  catalog + "话"
         print("开始下载" + file_path,catalog,sid,iid)
         self.mkdir(file_path)
         while (id <= iid):
