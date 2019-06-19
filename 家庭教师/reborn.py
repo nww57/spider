@@ -100,5 +100,5 @@ class Reborn():
             id = id + 1
 
 if __name__ == '__main__':
-    migudm = Migudm()
+    migudm = Reborn()
     migudm.download399()
