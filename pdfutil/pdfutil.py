@@ -43,4 +43,4 @@ def mergePDF(filepath='',output_filename='out.pdf',import_bookmarks=False):
 
 
 if __name__ == '__main__':
-    changeToPDF("D:\\comic\\钻石王牌act2\\原画","D:\\comic\\钻石王牌act2\\pdf")
+    changeToPDF("D:\\comic\\鸭子的天空\\第1卷","D:\\comic\\鸭子的天空\\pdf")

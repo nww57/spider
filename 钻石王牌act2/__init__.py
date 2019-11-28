@@ -12,7 +12,7 @@ class Act():
         self.headers = {
             'User-Agent': "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
         }
-        self.domain = 'https://www.mhkan.com'
+        self.domain = 'https://www.gufengmh8.com/'
         self.img_domain= 'https://res.gufengmh8.com/' #'http://res.mhkan.com/'
 
     def request(self, url):  ##这个函数获取网页的response 然后返回
@@ -39,11 +39,13 @@ class Act():
             return False
     '''
     爬取漫画
+      https://www.mhkan.com/manhua/zuanshiwangpait2/
+      https://www.gufengmh8.com/manhua/zuanshiwangpait2/#chapters
     '''
 
-    def download(self):
-        html_url = "https://www.mhkan.com/manhua/zuanshiwangpait2/"
-        soup = BeautifulSoup(self.request(html_url).text, 'lxml')
+    def download(self,url):
+
+        soup = BeautifulSoup(self.request(url).text, 'lxml')
         list = soup.find('ul', id='chapter-list-1').find_all('a')
         for a in list:
             span_tag = a.span.extract()
@@ -52,6 +54,7 @@ class Act():
             chapter = BeautifulSoup(self.request(self.domain+href).text, 'lxml')
             self.getChapterImage(chapter)
         print("下载完成")
+
 
     '''
     www.gufengmh8.com下载单章节,self.img_domain = 'https://res.gufengmh8.com/'
@@ -82,5 +85,5 @@ class Act():
 
 if __name__ == '__main__':
     act= Act()
-    act.downloadOne('第170话 无数次',"https://www.gufengmh8.com/manhua/zuanshiwangpait2/941344.html")
-
+    # act.downloadOne('第170话 无数次',"https://www.gufengmh8.com/manhua/zuanshiwangpait2/941344.html")
+    act.download("https://www.gufengmh8.com/manhua/zuanshiwangpait2/#chapters")
